@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{/layout :: head}">
+    <title>Title</title>
+</head>
+<body>
+<h2>Tiệm sách Cường víp rồ</h2>
+<nav th:replace="~{/layout :: nav}"></nav>
+<div class="container w-50 mt-5 mx-auto rounded-4">
+    <div class="p-5 shadow">
+        <form action="/loan/create" th:object="${loan}" method="post">
+            <div>Mã Mượn sách</div>
+            <div th:text="${loan.loanCode}"></div>
+            <div class="mb-3">
+                <label for="nameCustomer" class="form-label">Tên Người Mượn</label>
+                <input type="text" class="form-control" id="nameCustomer" th:field="*{nameCustomer}">
+                <div th:if="${#fields.hasErrors('nameCustomer')}" th:errors="*{nameCustomer}" ></div>
+            </div>
+            <div>
+                <label class="form-label">Tên sách</label>
+                <input type="hidden" class="form-control" th:field="*{book}">
+                <input disabled type="text" class="form-control" th:value="${loan.book.title}">
+            </div>
+            <div>
+                <label class="form-label">Mã mượn sách</label>
+                <input type="hidden" class="form-control" th:field="*{loanCode}">
+                <input disabled type="text" class="form-control" th:value="${loan.loanCode}">
+            </div>
+            <div class="mb-3">
+                <label for="loanDate" class="form-label">Ngày trả</label>
+                <input type="date" class="form-control" id="loanDate" th:field="*{loanDate}">
+                <div th:if="${#fields.hasErrors('loanDate')}" th:errors="*{loanDate}" ></div>
+            </div>
+                <button type="submit" class="btn btn-primary">Lưu</button>
+                <a th:href="@{/books}" class="btn btn-primary" >Thoát</a>
+        </form>
+    </div>
+
+</div>
+
+</body>
+
+</html>

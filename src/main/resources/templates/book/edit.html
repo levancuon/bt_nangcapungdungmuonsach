@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{/layout :: head}">
+    <title>Title</title>
+</head>
+<body>
+<h2>Tiệm sách Cường víp rồ</h2>
+<nav th:replace="~{/layout :: nav}"></nav>
+<div class="container w-50 mt-5 mx-auto rounded-4">
+    <div class="p-5 shadow">
+        <form action="/books/edit" th:object="${book}" method="post">
+            <input type="hidden" th:field="*{id}" >
+            <div class="mb-3">
+                <label for="name" class="form-label">Tên sách</label>
+                <input type="text" class="form-control" id="title" th:field="*{title}">
+                <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" ></div>
+            </div>
+            <div class="mb-3">
+                <label for="quantity" class="form-label">quantity</label>
+                <input type="number" class="form-control" id="quantity" th:field="*{quantity}">
+                <div th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" ></div>
+
+                <button type="submit" class="btn btn-primary">Lưu</button>
+                <a th:href="@{/books}" class="btn btn-primary" >Thoát</a>
+        </form>
+    </div>
+
+</div>
+
+</body>
+
+</html>

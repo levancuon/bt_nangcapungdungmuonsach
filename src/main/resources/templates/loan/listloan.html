@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{layout::head}" >
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Tiệm sách Cường víp rồ</h2>
+<nav th:replace="~{/layout :: nav}"></nav>
+<div class="container mt-5 shadow-sm p-3">
+    <p th:text="${message}" class="text-danger"></p>
+    <table class="table table-hover table-bordered">
+        <tr>
+            <th>STT</th>
+            <th>Mã mượn sách</th>
+            <th>Tên sách</th>
+            <th>Ngày trả</th>
+            <th>Hành động</th>
+        </tr>
+        <tr th:each="l,lStatus : ${loans}">
+            <td th:text="${lStatus.count}"></td>
+            <td th:text="${l.loanCode}"></td>
+            <td th:text="${l.book.title}"></td>
+            <td th:text="${l.loanDate}"></td>
+            <td>
+                <a th:if="${!l.status}" th:href="@{/loan/__${l.getId()}__/return}" class="btn btn-sm btn-outline-danger">Trả sách</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+
+</body>
+</html>
